@@ -1,11 +1,11 @@
 <div align="center">
 
   <p align="center">
-    <img src="" alt="Bot Banner" width="900">
+    <img src="https://github.com/ParsaPorRashidi/NOIR-Cafe-Website/blob/main/Static/images/NOIR-cafe.png" alt="Bot Banner" width="900">
   </p>
   
   <h1>☕ Cafe Platform / Website</h1>
-
+    <p>Powerd by Back-Blaze & KaviCode</p>
 
 ---
 
@@ -196,7 +196,7 @@ python manage.py createsuperuser
 ```Bash
 python manage.py runserver
 ```
-پروژه در آدرس http://127.0.0.1:8000/ آماده استفاده است. برای ورود به پنل مدیریت نیز می‌توانید به مسیر http://127.0.0.1:8000/admin/ مراجعه کنید.
+پروژه در آدرس http://127.0.0.1:8000/ آماده استفاده است. برای ورود به پنل مدیریت نیز می‌توانید به مسیر http://127.0.0.1:8000/noir-1405// مراجعه کنید.
 
 #### 📄 License / لایسنس
 This project is licensed under the MIT License - see the LICENSE file for details.
