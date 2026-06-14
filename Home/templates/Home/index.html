@@ -1,0 +1,733 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Noir — هنر اصیل قهوه</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://lib.arvancloud.ir/shabnam-font/5.0.1/Farsi-Digits-Without-Latin/Shabnam-Bold-FD-WOL.eot" rel="stylesheet">
+<!-- افزوده شدن وب‌فونت آیکون‌های Tabler برای نقشه و اعلان‌ها -->
+<link rel="stylesheet" href="https://lib.arvancloud.ir/tabler-icons/1.9.0/iconfont/tabler-icons.min.css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="glass-wrapper">
+
+  <nav id="nav">
+    <div class="logo-text">NOIR</div>
+    <ul class="nav-links">
+      <li><a href="#home">خانه</a></li>
+      <li><a href="#products">ویژه‌ها</a></li>
+      <li><a href="#menu">منو کامل</a></li>
+      <li><a href="#events">رویدادها</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn-primary" onclick="openModal()">صدا زدن گارسون</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-badge"><span></span>کافه تخصصی نسل سوم</div>
+      <h1 class="hero-title">جایی برای <span id="typing-effect" style="color: var(--moss-green); border-left: 2px solid var(--moss-green); padding-left: 5px;"></span><br>طعم واقعی <em>اسپرسو</em></h1>
+      <p class="hero-desc">در کافه نوآر، هر دانه قهوه با دقت انتخاب و با حساسیت بالا برشته کاری می‌شود تا نهایت عطر و طعم اصیل قهوه ارگانیک را در فنجان شما جاری کند.</p>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">+۲۵</div>
+          <div class="stat-label">میکس اختصاصی</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div>
+          <div class="stat-num">+۴k</div>
+          <div class="stat-label">همراهان وفادار</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-box">
+        <img id="heroImage" src="{% static 'images/main2.jfif' %}" alt="Premium Coffee">
+      </div>
+      <div class="floating-badge" id="baristaOffer"></div>
+    </div>
+  </section>
+
+  <section class="slider-section reveal">
+    <div class="slider-wrapper">
+      <div class="slider-track" id="sliderTrack"></div>
+      <button class="slider-btn prev" id="sliderPrev">&#8250;</button>
+      <button class="slider-btn next" id="sliderNext">&#8249;</button>
+    </div>
+  </section>
+
+  <section class="products-section reveal" id="products">
+    <div class="section-header">
+      <h4 class="section-label">امضای کافه نوآر</h4>
+      <h2 class="section-title">نوشیدنی‌های محبوب و ویژه</h2>
+    </div>
+    <div class="products-grid" id="specialProductsGrid"></div>
+  </section>
+
+  <section class="menu-section reveal" id="menu">
+    <div class="section-header">
+      <h4 class="section-label">منوی تفکیک شده</h4>
+      <h2 class="section-title">بار گرم، سرد و دسرهای پخت روز</h2>
+    </div>
+
+    <div class="menu-tabs" id="menuTabsContainer"></div>
+
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <section class="events-section reveal" id="events">
+    <div class="section-header">
+      <h4 class="section-label">جامعه کوچک ما</h4>
+      <h2 class="section-title">رویدادها و کارگاه‌های این ماه</h2>
+    </div>
+    <div class="events-grid" id="eventsGrid"></div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>Café Noir</h3>
+        <p>جایی که لاین‌های تخصصی قهوه، هنر باریستا و معماری شیشه‌ای مینیمال برای خلق تجربه‌ای تکرار نشدنی با هم ملاقات می‌کنند.</p>
+      </div>
+      <div class="footer-col">
+        <h4>ساعات کاری</h4>
+        <ul>
+          <li>شنبه تا چهارشنبه: ۸ صبح الی ۲۳</li>
+          <li>پنجشنبه و جمعه: ۹ صبح الی ۲۴</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>ارتباط با ما</h4>
+        <ul>
+          <li>تلفن: ۰۲۱-۸۸۹۹۰۰۱۱</li>
+          <li>آدرس: تهران، بلوار کشاورز، پلاک ۴۲</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© Powered by Back-Blaze & KaviCode | NOIR</p>
+    </div>
+  </footer>
+
+</div>
+
+<div class="music-player-container player-collapsed" id="musicPlayer">
+  <div class="music-notes-container" id="notesContainer"></div>
+  <div class="player-header">
+    <div class="player-title">📻 NOIR RADIO</div>
+    <button class="player-toggle-btn" id="playerToggle">▼</button>
+  </div>
+  <div class="track-info">
+    <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=100&auto=format&fit=cover" alt="Cover" class="track-art" id="playerArt">
+    <div class="track-text">
+      <div class="track-name" id="trackName">Midnight Lounge Jazz</div>
+      <div class="track-artist" id="trackArtist">Cafe Paris Records</div>
+    </div>
+  </div>
+  <div class="player-controls">
+    <div class="progress-container">
+      <span id="currentTime">0:00</span>
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span id="totalTime">0:00</span>
+    </div>
+    <div class="control-btns">
+      <button class="audio-btn" id="audioPrev">⏮</button>
+      <button class="audio-btn play-pause" id="audioPlayPause">▶</button>
+      <button class="audio-btn" id="audioNext">⏭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ساختار مودال هوشمند نقشه میزها و اعلان توست ─── -->
+<div class="overlay" id="overlay" onclick="handleOverlayClick(event)" role="dialog" aria-modal="true" aria-label="انتخاب میز">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">کدام میز هستید؟</div>
+        <div class="modal-sub">موقعیت خودتون رو روی نقشه کافه انتخاب کنید</div>
+      </div>
+      <button class="close-btn" onclick="closeModal()" aria-label="بستن مودال">
+        <i class="ti ti-x"></i>
+      </button>
+    </div>
+
+    <div class="floor-wrap">
+      <div class="floor-plan" id="floorPlan">
+        <div class="zone-terrace"></div>
+        <div class="zone-kitchen"></div>
+
+        <div class="wall" style="right:31.5%; top:0; width:1.5px; height:100%"></div>
+        <div class="wall" style="right:0; top:19%; width:13%; height:1.5px;"></div>
+        <div class="wall" style="right:13%; top:0; width:1.5px; height:19%"></div>
+
+        <div class="zone-label" style="left:2.5%; top:10%; height:16%">تراس بیرونی</div>
+        <div class="zone-label" style="right:11%; top:45%; height:16%">بار & آشپزخانه</div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--table-fill); border:1.5px solid var(--table-stroke)"></div>
+          میز سالن
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--floor); border:1px dashed var(--border-md-m)"></div>
+          تراس
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--accent-m); border:1.5px solid var(--accent-dark-m)"></div>
+          انتخاب شما
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <span class="selected-info" id="selInfo">لطفاً میز خودتون رو انتخاب کنید</span>
+      <button class="confirm-btn" id="confirmBtn" onclick="sendCall()">
+        <i class="ti ti-bell"></i>
+        تأیید و صدا زدن گارسون
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-waiter" id="toastWaiter">
+  <i class="ti ti-check"></i>
+  <span id="toastMsg">درخواست ارسال شد</span>
+</div>
+
+<audio id="mainAudio" src=""></audio>
+
+<script>
+  const HOME_API_URL = '/api/home/';
+  let allMenuProducts = [];
+
+  // دیتای سازمان‌یافته میزها روی پلان معماری
+  const TABLES = [
+    {id:'O1', code:'T1', label:'تراس – میز ۱', x:2, y:33, w:13, h:9, round:true, chairs:['t','b']},
+    {id:'O2', code:'T2', label:'تراس – میز ۲', x:2, y:48, w:13, h:9, round:true, chairs:['t','b']},
+    {id:'O3', code:'T3', label:'تراس – میز ۳', x:2, y:63, w:13, h:9, round:true, chairs:['t','b']},
+    {id:'L1', code:'VIP', label:'سالن – مبل لانژ VIP', x:25, y:6, w:13, h:9, round:false, chairs:['sofa','l','r']},
+    {id:'T1', code:'A1', label:'سالن – میز دو نفره A1', x:21, y:30, w:12, h:8, round:false, chairs:['t','b']},
+    {id:'T2', code:'A2', label:'سالن – میز دو نفره A2', x:21, y:44, w:12, h:8, round:false, chairs:['t','b']},
+    {id:'T3', code:'B1', label:'سالن – میز دو نفره B1', x:37, y:30, w:12, h:8, round:false, chairs:['t','b']},
+    {id:'T4', code:'B2', label:'سالن – میز دو نفره B2', x:37, y:44, w:12, h:8, round:false, chairs:['t','b']},
+    {id:'T5', code:'B3', label:'سالن – میز کنار B3', x:37.6, y:57, w:11, h:7, round:false, chairs:['t','b']},
+    {id:'V1', code:'C1', label:'سالن – باکس مبلی C1', x:22, y:65, w:10, h:7, round:false, chairs:['t','b']},
+    {id:'V2', code:'C2', label:'سالن – باکس مبلی C2', x:22, y:76, w:10, h:7, round:false, chairs:['t','b']},
+    {id:'V3', code:'C3', label:'سالن – باکس مبلی C3', x:22, y:87, w:10, h:7, round:false, chairs:['t','b']},
+    {id:'M1', code:'G1', label:'سالن – میز گروهی G1', x:36, y:76, w:16, h:10, round:false, chairs:['t1','t2','t3','b1','b2','b3']},
+  ];
+
+  let selectedTable = null;
+
+  async function initLandingPage() {
+    try {
+      const response = await fetch(HOME_API_URL);
+      if (!response.ok) throw new Error('خطا در دریافت دیتای اصلی صفحه');
+
+      const data = await response.json();
+
+      renderBaristaOffer(data.barista_offer);
+      renderSlider(data.banners);
+      renderSpecialProducts(data.special_products);
+      renderMenuTabsAndProducts(data.categories, data.menu_products);
+      renderEvents(data.events);
+
+      revealOnScroll();
+
+    } catch (error) {
+      console.error("خطای کلی سیستم لوودر فرانت:", error);
+    }
+  }
+
+  // منطق ساخت پویا بوم پلان کافه
+  function buildFloor() {
+    const fp = document.getElementById('floorPlan');
+    if (!fp) return;
+
+    TABLES.forEach(t => {
+      const g = document.createElement('div');
+      g.className = 'table-group' + (t.round ? ' round' : '');
+      g.dataset.id = t.id;
+      g.style.cssText = `left:${t.x}%;top:${t.y}%;width:${t.w}%;height:${t.h}%`;
+
+      const top = document.createElement('div');
+      top.className = 'table-top';
+      top.textContent = t.code;
+      g.appendChild(top);
+
+      (t.chairs || []).forEach(pos => {
+        const c = document.createElement('div');
+        c.className = `chair ${pos}`;
+        g.appendChild(c);
+      });
+
+      g.addEventListener('click', () => selectTable(t.id, t.label));
+      fp.appendChild(g);
+    });
+
+    [['B1','۱',34.5,36], ['B2','۲',34.5,43], ['B3','۳',34.5,50], ['B4','۴',34.5,57]].forEach(([id, num, r, t]) => {
+      const s = document.createElement('div');
+      s.className = 'bar-stool';
+      s.dataset.id = id;
+      s.style.cssText = `right:${r}%;top:${t}%`;
+      s.textContent = num;
+      s.addEventListener('click', () => selectTable(id, `بار کانتر – صندلی ${num}`));
+      fp.appendChild(s);
+    });
+  }
+
+  function selectTable(id, label) {
+    document.querySelectorAll('.table-group').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.bar-stool').forEach(el => el.classList.remove('selected'));
+
+    const el = document.querySelector(`[data-id="${id}"]`);
+    if (el) el.classList.add('selected');
+
+    selectedTable = { id, label };
+    document.getElementById('selInfo').innerHTML = `انتخاب شده: <strong>${label}</strong>`;
+    document.getElementById('confirmBtn').classList.add('active');
+  }
+
+  function openModal() {
+    resetModal();
+    document.getElementById('overlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('overlay').classList.remove('open');
+  }
+
+  function resetModal() {
+    selectedTable = null;
+    document.querySelectorAll('.table-group').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.bar-stool').forEach(el => el.classList.remove('selected'));
+    document.getElementById('selInfo').textContent = 'لطفاً میز خودتون رو انتخاب کنید';
+    document.getElementById('confirmBtn').classList.remove('active');
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('overlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  async function sendCall() {
+    if (!selectedTable) return;
+
+    const payload = {
+      table_id: selectedTable.id,
+      table_label: selectedTable.label
+    };
+
+    try {
+      const response = await fetch('/api/waiter/call/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        closeModal();
+        showToastWaiter(`درخواست شما برای «${selectedTable.label}» ثبت شد. گارسون به‌زودی مراجعه می‌کند.`);
+        resetModal();
+      } else {
+        showToastWaiter('خطا در ارسال درخواست. لطفاً دوباره تلاش کنید.');
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      showToastWaiter('ارتباط با سرور برقرار نشد.');
+    }
+  }
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  let toastWaiterTimer = null;
+  function showToastWaiter(msg) {
+    const toast = document.getElementById('toastWaiter');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    if (toastWaiterTimer) clearTimeout(toastWaiterTimer);
+    toastWaiterTimer = setTimeout(() => toast.classList.remove('show'), 3600);
+  }
+
+function renderBaristaOffer(data) {
+  const container = document.getElementById('baristaOffer');
+  const heroImage = document.getElementById('heroImage');
+
+  // اضافه کن:
+  if (!container || !heroImage) return;
+
+  const defaultImage = "{% static 'images/main2.jfif' %}";
+
+    if (data) {
+      container.style.display = 'block';
+      container.innerHTML = `
+        <span>${data.label || 'پیشنهاد باریستا'}</span>
+        <strong>${data.title}</strong>
+      `;
+      if (data.image) {
+        heroImage.src = data.image;
+      }
+    } else {
+      container.style.display = 'none';
+      heroImage.src = defaultImage;
+    }
+  }
+
+  function renderSlider(slidesData) {
+    if (!slidesData || slidesData.length === 0) return;
+    const track = document.getElementById('sliderTrack');
+    track.innerHTML = slidesData.map(slide => `
+      <div class="slide">
+        <img src="${slide.image}" alt="${slide.title}">
+        <div class="slide-overlay">
+          <div class="slide-title">${slide.title}</div>
+          <div class="slide-sub">${slide.subtitle}</div>
+        </div>
+      </div>
+    `).join('');
+
+    initSliderLogic();
+  }
+
+  function renderSpecialProducts(favoriteItems) {
+    if (!favoriteItems || favoriteItems.length === 0) return;
+    const grid = document.getElementById('specialProductsGrid');
+
+    grid.innerHTML = favoriteItems.map(item => {
+      const prod = item.product;
+      if (!prod) return '';
+      return `
+        <div class="product-card">
+          <img class="product-img" src="${prod.image}" alt="${prod.name}">
+          <h3 class="product-name">${prod.name}</h3>
+          <p class="product-desc">${prod.desc || ''}</p>
+          <div class="product-footer">
+            <span class="product-price">${Number(prod.price).toLocaleString()} تومان</span>
+            <button class="add-to-cart">+</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderMenuTabsAndProducts(categories, menuProducts) {
+    if (!menuProducts) return;
+    allMenuProducts = menuProducts;
+
+    const tabsContainer = document.getElementById('menuTabsContainer');
+    if (categories && categories.length > 0) {
+      let tabsHtml = `<button class="tab active" data-tab="all">همه آیتم‌ها</button>`;
+      categories.forEach(cat => {
+        tabsHtml += `<button class="tab" data-tab="${cat.slug}">${cat.name}</button>`;
+      });
+      tabsContainer.innerHTML = tabsHtml;
+    }
+
+    filterMenuItems('all');
+    initMenuTabsLogic();
+  }
+
+  function filterMenuItems(categorySlug) {
+    const grid = document.getElementById('menuGrid');
+    const filtered = categorySlug === 'all'
+      ? allMenuProducts
+      : allMenuProducts.filter(item => item.category === categorySlug);
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<p style="text-align:center; color:var(--coffee-medium); grid-column: 1/-1;">محصولی در این دسته‌ب بندی یافت نشد.</p>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(item => `
+      <div class="menu-item" data-category="${item.category}">
+        <img src="${item.image}" class="menu-thumb" alt="${item.name}">
+        <div class="menu-detail">
+          <div class="menu-title-row">
+            <span class="menu-item-name">${item.name}</span>
+            <span class="menu-item-price">${Number(item.price).toLocaleString()} تومان</span>
+          </div>
+          <p class="menu-item-desc">${item.desc || ''}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function initMenuTabsLogic() {
+    const tabsContainer = document.getElementById('menuTabsContainer');
+    tabsContainer.replaceWith(tabsContainer.cloneNode(true));
+    const newTabsContainer = document.getElementById('menuTabsContainer');
+
+    newTabsContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('tab')) {
+        const tabs = newTabsContainer.querySelectorAll('.tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        filterMenuItems(e.target.dataset.tab);
+      }
+    });
+  }
+
+  function renderEvents(events) {
+    if (!events || events.length === 0) return;
+    const grid = document.getElementById('eventsGrid');
+    grid.innerHTML = events.map(event => `
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="${event.image}" alt="${event.title}">
+          <span class="event-date">${event.jalali_date}</span>
+        </div>
+        <div class="event-body">
+          <h3 class="event-title">${event.title}</h3>
+          <p class="event-desc">${event.desc}</p>
+          <div class="event-time">⏰ ${event.time_range}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const revealOnScroll = () => {
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight * 0.88) el.classList.add('active');
+    });
+  };
+  window.addEventListener('scroll', revealOnScroll);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initLandingPage();
+    buildFloor();
+  });
+
+  // ─── AUDIO PLAYER LOGIC (یکپارچه شده با منطق نوت‌های داینامیک و بدون خطا) ───
+  (function() {
+    let playlist = [];
+    let index = 0;
+    let isPlaying = false;
+
+    const audio = document.getElementById('mainAudio');
+    const playPauseBtn = document.getElementById('audioPlayPause');
+    const trackNameEl = document.getElementById('trackName');
+    const trackArtistEl = document.getElementById('trackArtist');
+    const playerArt = document.getElementById('playerArt');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const playerContainer = document.getElementById('musicPlayer');
+    const playerToggle = document.getElementById('playerToggle');
+
+    // المان‌های مدیریت نوت‌های موسیقی در اسکوپ محلی
+    const notesContainer = document.getElementById('notesContainer');
+    let notesInterval = null;
+    const noteSymbols = ['♫', '♪', '♩', '♬', '♭'];
+
+    function createNote() {
+      if (!isPlaying || !notesContainer) return;
+      const note = document.createElement('div');
+      note.className = 'music-note';
+      note.textContent = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
+
+      note.style.left = Math.random() * 80 + 'px';
+      note.style.animationDelay = Math.random() * 0.4 + 's';
+      note.style.fontSize = Math.floor(Math.random() * 8) + 14 + 'px';
+
+      notesContainer.appendChild(note);
+
+      setTimeout(() => { note.remove(); }, 3000);
+    }
+
+    async function fetchPlaylist() {
+      try {
+        const res = await fetch('/api/playlist/');
+        if (!res.ok) throw new Error('خطا در دریافت پلیلیست');
+        const data = await res.json();
+        playlist = data.playlist.filter(t => t.src);
+        if (playlist.length > 0) loadTrack(0);
+      } catch (err) {
+        console.error('Playlist fetch error:', err);
+      }
+    }
+
+    function loadTrack(i) {
+      if (!playlist.length) return;
+      const track = playlist[i];
+      audio.src = track.src;
+      trackNameEl.textContent = track.name;
+      trackArtistEl.textContent = track.artist;
+      if (track.cover_image) playerArt.src = track.cover_image;
+    }
+
+    // بازنشانی ایمن وضعیت تایمر نوت‌ها هنگام تعویض تراک
+    function clearNotes() {
+      if (notesInterval) {
+        clearInterval(notesInterval);
+        notesInterval = null;
+      }
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+      if (!playlist.length) return;
+      if (isPlaying) {
+        audio.pause();
+        playPauseBtn.textContent = "▶";
+        clearNotes();
+      } else {
+        audio.play().catch(() => {});
+        playPauseBtn.textContent = "⏸";
+        if (!notesInterval) {
+          notesInterval = setInterval(createNote, 550);
+        }
+      }
+      isPlaying = !isPlaying;
+    });
+
+    document.getElementById('audioNext').addEventListener('click', () => {
+      if (!playlist.length) return;
+      index = (index + 1) % playlist.length;
+      loadTrack(index);
+      if (isPlaying) {
+        audio.play().catch(() => {});
+      }
+    });
+
+    document.getElementById('audioPrev').addEventListener('click', () => {
+      if (!playlist.length) return;
+      index = (index - 1 + playlist.length) % playlist.length;
+      loadTrack(index);
+      if (isPlaying) {
+        audio.play().catch(() => {});
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      index = (index + 1) % playlist.length;
+      loadTrack(index);
+      audio.play().catch(() => {});
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      progressFill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+      const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+      currentTimeEl.textContent = fmt(audio.currentTime);
+      totalTimeEl.textContent = fmt(audio.duration);
+    });
+
+    playerToggle.addEventListener('click', () => {
+      const coll = playerContainer.classList.toggle('player-collapsed');
+      playerToggle.textContent = coll ? "▲" : "▼";
+    });
+
+    fetchPlaylist();
+  })();
+
+  // انیمیشن تایپ زنده برای کلمات کلیدی کافه
+  document.addEventListener('DOMContentLoaded', () => {
+    const words = ["ایده‌ها...", "تمرکز شما...", "گفتگوهای عمیق...", "آرامش روزانه..."];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const target = document.getElementById('typing-effect');
+
+    function type() {
+      const currentWord = words[wordIndex];
+      if (isDeleting) {
+        target.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        target.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 50 : 120;
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 1500;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 400;
+      }
+
+      setTimeout(type, typeSpeed);
+    }
+
+    if(target) type();
+  });
+
+  // منطق حرکت هوشمند و خودکار اسلایدر
+  function initSliderLogic() {
+    const track = document.getElementById('sliderTrack');
+    const slides = track.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+    let autoPlayTimer = null;
+    if(total === 0) return;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = `translateX(${current * 100}%)`;
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(() => {
+        goTo(current + 1);
+      }, 4500);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+    }
+
+    const nextBtn = document.getElementById('sliderNext');
+    const prevBtn = document.getElementById('sliderPrev');
+    nextBtn.replaceWith(nextBtn.cloneNode(true));
+    prevBtn.replaceWith(prevBtn.cloneNode(true));
+
+    document.getElementById('sliderNext').addEventListener('click', () => {
+      goTo(current + 1);
+      startAutoPlay();
+    });
+    document.getElementById('sliderPrev').addEventListener('click', () => {
+      goTo(current - 1);
+      startAutoPlay();
+    });
+
+    track.addEventListener('mouseenter', stopAutoPlay);
+    track.addEventListener('mouseleave', startAutoPlay);
+
+    startAutoPlay();
+  }
+</script>
+
+</body>
+</html>

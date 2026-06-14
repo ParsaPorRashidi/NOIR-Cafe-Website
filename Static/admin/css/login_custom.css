@@ -1,0 +1,177 @@
+  /* ── وسط‌چین کردن کامل کل صفحه لاگین ── */
+  body.login {
+    font-family: 'Vazirmatn', system-ui, sans-serif !important;
+    background: #0a0d08 !important; /* لایه عمیق ماچا */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    direction: rtl;
+  }
+
+  #header {
+    display: none !important;
+  }
+  /* خنثی کردن ساختار کانتینرهای پیش‌فرض جنگو */
+/* استایل پیش‌فرض برای دسکتاپ و مانیتورهای بزرگ */
+#container {
+  background: transparent !important;
+  border: none !important;
+  width: 100% !important;
+  max-width: 420px !important; /* مهار عرض باکس */
+  margin: 0 auto !important;
+  padding: 190px !important; /* پدینگ مانیتورهای بزرگ */
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  #container {
+    padding: 16px !important;
+  }
+
+  .login #content-main {
+    padding: 32px 20px !important;
+  }
+}
+
+  #content {
+    padding: 0 !important;
+    width: 100% !important;
+    background: transparent !important;
+  }
+
+  #nav-sidebar , #toggle-nav-sidebar {
+    display: none !important;
+  }
+
+
+  .login #header, .login .breadcrumbs, .login .sidebar, .login #user-tools {
+    display: none !important;
+  }
+
+  /* ── باکس کارت لاگین اختصاصی (مرکزی و شکیل) ── */
+  .login #content-main {
+    background: #161d13 !important; /* رنگ اصلی کارت‌ها var(--bg-surface) */
+    border: 1px solid #4c6444 !important; /* حاشیه ماچا کم‌رنگ */
+    padding: 40px 32px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    float: none !important; /* حذف فلوت سنتی جنگو */
+    margin: 0 !important;
+  }
+  /* عنوان ورود */
+  .login #content-main h1 {
+    color: #e8dcc8 !important; /* کرم روشن */
+    text-align: center !important;
+    margin: 0 0 32px 0 !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* ردیف‌های فرم */
+  .login .form-row {
+    padding: 12px 0 !important;
+    border: none !important;
+    background: transparent !important;
+    display: flex !important;
+    flex-direction: column !important; /* عمودی کردن لیبل و اینپوت */
+    gap: 8px !important;
+    width: 100% !important;
+    clear: both !important;
+  }
+
+  /* لیبل‌ها */
+  .login label {
+    color: #8a9280 !important; /* خاکستری ماچا */
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    text-align: right !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  /* ── اینپوت‌ها ── */
+  .login input[type=text],
+  .login input[type=password] {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+    border: 1px solid #4c6444 !important;
+    background: #1c2518 !important; /* المان برجسته */
+    color: #e8dcc8 !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-size: 14px !important;
+    transition: all 0.2s ease !important;
+    height: auto !important;
+  }
+
+  .login input[type=text]:focus,
+  .login input[type=password]:focus {
+    outline: none !important;
+    border-color: #a8c97f !important; /* ماچا مید */
+    box-shadow: 0 0 0 3px rgba(168, 201, 127, 0.15) !important;
+    background: #222e1d !important;
+  }
+
+  /* دکمه ارسال */
+  .login .submit-row {
+    background: transparent !important;
+    border: none !important;
+    padding: 24px 0 0 0 !important;
+    margin: 0 !important;
+    text-align: center !important;
+    float: none !important;
+  }
+
+  .login input[type=submit] {
+    width: 100% !important;
+    padding: 12px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    background: #2d3a22 !important; /* سبز عمیق */
+    color: #c8f53a !important; /* ماچا روشن */
+    border: 1px solid #4c6444 !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    float: none !important;
+  }
+
+  .login input[type=submit]:hover {
+    background: #c8f53a !important;
+    color: #0a0d08 !important;
+    border-color: #c8f53a !important;
+    box-shadow: 0 4px 12px rgba(200, 245, 58, 0.2) !important;
+  }
+
+  /* ارورها */
+  .errornote {
+    background: #1e0f05 !important;
+    color: #c87941 !important;
+    border: 1px solid #4a2c11 !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    padding: 12px !important;
+    margin-bottom: 20px !important;
+    text-align: right !important;
+  }
+  .errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .errorlist li {
+    color: #c87941 !important;
+    font-size: 11px !important;
+    list-style: none !important;
+    text-align: right !important;
+    margin-top: 4px !important;
+  }

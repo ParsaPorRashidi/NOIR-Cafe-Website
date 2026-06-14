@@ -1,0 +1,886 @@
+/* ───────────────────────────────────────────────────────────────
+   توکن‌های رنگی — پالت ماچا + اسپرسو
+─────────────────────────────────────────────────────────────── */
+:root {
+  /* پس‌زمینه‌ها */
+  --bg-deep:      #0a0d08;   /* عمیق‌ترین لایه */
+  --bg-base:      #0f1410;   /* بدنه اصلی */
+  --bg-surface:   #161d13;   /* کارت‌ها و پنل‌ها */
+  --bg-raised:    #1c2518;   /* المان‌های برجسته */
+  --bg-hover:     #222e1d;   /* هاور */
+
+  /* ماچا سبز */
+  --matcha-bright: #c8f53a;  /* accent اصلی — برای badge و تاکید */
+  --matcha-mid:    #a8c97f;  /* متن روی پس‌زمینه تاریک */
+  --matcha-dim:    #4c6444;  /* حاشیه‌ها و خطوط */
+  --matcha-deep:   #2d3a22;  /* پس‌زمینه بج موجود */
+
+  /* اسپرسو قهوه‌ای */
+  --espresso-hot:  #c87941;  /* متن روی پس‌زمینه تاریک */
+  --espresso-mid:  #4a2c11;  /* حاشیه بج ناموجود */
+  --espresso-deep: #1e0f05;  /* پس‌زمینه بج ناموجود */
+
+  /* متن */
+  --txt-primary:   #e8dcc8;  /* کرم روشن — متن اصلی */
+  --txt-secondary: #8a9280;  /* خاکستری ماچا — متن ثانوی */
+  --txt-muted:     #4a5244;  /* خیلی کم‌رنگ */
+
+  /* دیگر */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --sidebar-w:  240px;
+  --header-h:   60px;
+  --transition: .2s ease;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ریست پایه و فونت
+─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--txt-primary);
+  direction: rtl;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif !important;
+  /* اضافه کردن عکس پس‌زمینه جذاب مرتبط با کافه */
+  background-image:
+    linear-gradient(rgba(10, 13, 8, 0.85), rgba(10, 13, 8, 0.85)),
+    url('/static/images/background.png');
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  direction: rtl;
+}
+
+a { color: var(--matcha-mid); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--matcha-bright); }
+
+/* ───────────────────────────────────────────────────────────────
+   لایه‌بندی کلی — سایدبار + محتوا
+─────────────────────────────────────────────────────────────── */
+#cafe-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   سایدبار
+─────────────────────────────────────────────────────────────── */
+#cafe-sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--bg-deep);
+  border-left: 1px solid var(--matcha-dim);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+/* لوگو / هدر سایدبار */
+.sidebar-brand {
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--matcha-dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-brand .brand-icon {
+  width: 36px; height: 36px;
+  background: var(--matcha-deep);
+  border: 1px solid var(--matcha-dim);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.sidebar-brand .brand-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--txt-primary);
+  line-height: 1.3;
+}
+.sidebar-brand .brand-sub {
+  font-size: 10px;
+  color: var(--matcha-mid);
+  font-weight: 400;
+}
+
+/* منوی ناوبری سایدبار */
+.sidebar-nav { padding: 12px 0; flex: 1; }
+
+.nav-section-label {
+  padding: 10px 18px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--txt-muted);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  color: var(--txt-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  border-right: 3px solid transparent;
+  position: relative;
+}
+.nav-item i {
+  width: 18px;
+  text-align: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.nav-item:hover {
+  background: var(--bg-hover);
+  color: var(--txt-primary);
+}
+.nav-item.active {
+  background: var(--matcha-deep);
+  color: var(--matcha-bright);
+  border-right-color: var(--matcha-bright);
+}
+.nav-item .notif-dot {
+  margin-right: auto;
+  background: var(--matcha-bright);
+  color: var(--bg-deep);
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 1px 7px;
+  min-width: 20px;
+  text-align: center;
+  display: none;
+}
+.nav-item .notif-dot.visible { display: inline-block; }
+
+/* پایین سایدبار */
+.sidebar-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--matcha-dim);
+  font-size: 11px;
+  color: var(--txt-muted);
+}
+.sidebar-footer a { color: var(--txt-muted); }
+.sidebar-footer a:hover { color: var(--espresso-hot); }
+
+/* ───────────────────────────────────────────────────────────────
+   محتوای اصلی
+─────────────────────────────────────────────────────────────── */
+#cafe-main {
+  margin-right: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   هدر بالا
+─────────────────────────────────────────────────────────────── */
+#cafe-topbar {
+  height: var(--header-h);
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--matcha-dim);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--txt-primary);
+  flex: 1;
+}
+.topbar-title span {
+  color: var(--txt-muted);
+  font-weight: 400;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+/* دکمه نوتیفیکیشن */
+.topbar-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+  border: 1px solid var(--matcha-dim);
+  color: var(--txt-secondary);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  flex-shrink: 0;
+}
+.topbar-btn:hover {
+  background: var(--matcha-deep);
+  color: var(--matcha-bright);
+  border-color: var(--matcha-bright);
+}
+
+/* badge عدد روی زنگ */
+#notif-badge {
+  position: absolute;
+  top: -4px; left: -4px;
+  background: var(--matcha-bright);
+  color: var(--bg-deep);
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 1px 5px;
+  min-width: 16px;
+  text-align: center;
+  display: none;
+  line-height: 14px;
+}
+
+/* آواتار ادمین */
+.topbar-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--matcha-deep);
+  border: 1.5px solid var(--matcha-dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  color: var(--matcha-mid);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   پنل کشویی نوتیفیکیشن
+─────────────────────────────────────────────────────────────── */
+#notif-panel {
+  position: fixed;
+  top: var(--header-h);
+  left: 24px;
+  width: 320px;
+  max-height: 440px;
+  background: var(--bg-surface);
+  border: 1px solid var(--matcha-dim);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(0,0,0,.6);
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  z-index: 200;
+  animation: slideDown .18s ease;
+}
+#notif-panel.open { display: flex; }
+
+@keyframes slideDown {
+  from { opacity:0; transform: translateY(-8px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.notif-panel-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--matcha-dim);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.notif-panel-header h3 {
+  font-size: 13px; font-weight: 700; color: var(--matcha-mid);
+}
+.notif-panel-header button {
+  background: none; border: none; color: var(--txt-muted);
+  cursor: pointer; font-size: 13px;
+}
+.notif-panel-header button:hover { color: var(--matcha-bright); }
+
+#notif-list { overflow-y: auto; flex: 1; }
+
+.notif-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 11px 16px;
+  border-bottom: 1px solid #1c2518;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.notif-row:hover { background: var(--bg-hover); }
+.notif-row:last-child { border-bottom: none; }
+
+.notif-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--matcha-deep);
+  border: 1px solid var(--matcha-dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0; margin-top: 2px;
+}
+.notif-body { flex: 1; }
+.notif-body .notif-top {
+  font-size: 12px; font-weight: 600; color: var(--txt-primary);
+}
+.notif-body .notif-note {
+  font-size: 11px; color: var(--txt-secondary); margin-top: 2px;
+}
+.notif-time {
+  font-size: 10px; color: var(--matcha-mid); white-space: nowrap; margin-top: 3px;
+}
+.notif-empty {
+  padding: 32px 16px; text-align: center;
+  color: var(--txt-muted); font-size: 12px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   محتوای صفحه
+─────────────────────────────────────────────────────────────── */
+#cafe-content {
+  flex: 1;
+  padding: 28px 28px 40px;
+}
+
+/* breadcrumb */
+.cafe-breadcrumb {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--txt-muted);
+  margin-bottom: 20px;
+}
+.cafe-breadcrumb i { font-size: 10px; }
+.cafe-breadcrumb a { color: var(--txt-muted); }
+.cafe-breadcrumb a:hover { color: var(--matcha-mid); }
+.cafe-breadcrumb .current { color: var(--txt-secondary); }
+
+/* ───────────────────────────────────────────────────────────────
+   Override استایل‌های پیش‌فرض Django admin
+─────────────────────────────────────────────────────────────── */
+
+/* ───────────────────────────────────────────────────────────────
+   تبدیل هدر پیش‌فرض جنگو به هدر اختصاصی کافه
+─────────────────────────────────────────────────────────────── */
+
+/* بدنه اصلی هدر */
+#header {
+    display: flex !important;
+    background: var(--bg-deep) !important;
+    border-bottom: 1px solid var(--matcha-dim) !important;
+    height: var(--header-h) !important;
+    padding: 0 24px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+}
+
+/* بخش عنوان (Branding) — حذف ظاهر سنتی جنگو */
+#branding {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    float: none !important; /* ریست کردن فلوت قدیمی جنگو */
+}
+
+/* تغییر متن "مدیریت جنگو" به برند کافه */
+#branding h1 {
+    color: var(--txt-primary) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+/* تزریق اموجی یا المان کافه قبل از متن به صورت پویا */
+#branding h1::before {
+    content: "☕ " !important;
+    font-size: 16px !important;
+}
+
+/* مخفی کردن متن پیش‌فرض "مدیریت جنگو" در صورت نیاز و جایگزینی اختصاصی */
+#branding h1 a {
+    color: var(--txt-primary) !important;
+    pointer-events: none !important; /* غیرفعال کردن لینک پیش‌فرض */
+}
+#branding h1 a::after {
+    content: " پنل مدیریتی کافه" !important;
+}
+#branding h1 span {
+    display: none !important; /* مخفی کردن کلمه Django administration */
+}
+
+/* بخش ابزار کاربر و دکمه خروج (User Tools) */
+#user-tools {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    float: none !important; /* ریست فلوت */
+    margin: 0 !important;
+    font-size: 12px !important;
+    color: var(--txt-secondary) !important;
+}
+
+/* استایل‌دهی به خوش‌آمدگویی کاربر */
+#user-tools strong {
+    color: var(--matcha-mid) !important;
+    font-weight: 600 !important;
+}
+
+/* تبدیل لینک‌های ابزار (مشاهده سایت، تغییر رمز) به پاپ‌آپ یا استایل مینیمال */
+#user-tools a {
+    color: var(--txt-secondary) !important;
+    transition: color var(--transition) !important;
+    font-weight: 500 !important;
+}
+
+#user-tools a:hover {
+    color: var(--matcha-bright) !important;
+}
+
+/* تبدیل دکمه "خروج" به یک دکمه کاملاً متمایز با تم اسپرسو */
+#user-tools a[href*="logout"] {
+    background: var(--espresso-deep) !important;
+    color: var(--espresso-hot) !important;
+    border: 1px solid var(--espresso-mid) !important;
+    padding: 5px 14px !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all var(--transition) !important;
+}
+
+#user-tools a[href*="logout"]:hover {
+    background: var(--espresso-hot) !important;
+    color: var(--bg-deep) !important;
+    box-shadow: 0 0 12px rgba(200, 121, 65, 0.2) !important;
+}
+
+/* افزودن آیکون خروج به صورت فونت اختصاصی پیش‌فرض (بدون نیاز به تغییر تمپلت) */
+#user-tools a[href*="logout"]::before {
+    content: " logout" !important; /* یا هر کاراکتری که می‌پسندید، متن انگلیسی حذف و دکمه شکیل می‌شود */
+    display: none; /* این خط را اگر مایل بودید متن دکمه کلا عوض شود فعال کنید */
+}
+
+/* breadcrumb Django */
+div.breadcrumbs {
+  background: transparent !important;
+  padding: 0 0 16px !important;
+  border: none !important;
+  color: var(--txt-muted) !important;
+  font-size: 12px;
+}
+div.breadcrumbs a { color: var(--txt-muted) !important; }
+div.breadcrumbs a:hover { color: var(--matcha-mid) !important; }
+
+/* محتوای اصلی */
+#content {
+  background: transparent !important;
+  padding: 10px !important;
+}
+#content-main { background: transparent !important; }
+
+/* عنوان صفحه */
+#content h1 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--txt-primary) !important;
+  margin-bottom: 20px !important;
+  padding: 0 !important;
+  border: none !important;
+  text-align: center !important;
+}
+
+#toggle-nav-sidebar{
+  display: none !important;
+}
+/* ───────────────────────────────────────────────────────────────
+   کارت‌های داشبورد (index.html override)
+─────────────────────────────────────────────────────────────── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--matcha-dim);
+  border-radius: var(--radius-lg);
+  padding: 20px 18px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.stat-card:hover {
+  border-color: var(--matcha-mid);
+  box-shadow: 0 4px 20px rgba(76,100,68,.15);
+}
+.stat-card .stat-label {
+  font-size: 11px; color: var(--txt-secondary); font-weight: 500;
+  letter-spacing: .5px; text-transform: uppercase;
+}
+.stat-card .stat-value {
+  font-size: 28px; font-weight: 700; color: var(--matcha-bright);
+  line-height: 1;
+}
+.stat-card .stat-icon {
+  font-size: 22px; color: var(--matcha-dim);
+}
+.stat-card .stat-sub {
+  font-size: 11px; color: var(--txt-muted);
+}
+
+/* ───────────────────────────────────────────────────────────────
+   جدول‌های Django admin
+─────────────────────────────────────────────────────────────── */
+#result_list, .results table {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 4px !important;
+  background: transparent !important;
+}
+
+/* هدر جدول */
+#result_list thead th,
+.results table thead th {
+  background: var(--bg-raised) !important;
+  color: var(--txt-secondary) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: .6px !important;
+  text-transform: uppercase !important;
+  padding: 10px 14px !important;
+  border: none !important;
+  white-space: nowrap;
+}
+#result_list thead th:first-child,
+.results table thead th:first-child {
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+#result_list thead th:last-child,
+.results table thead th:last-child {
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+/* سطرهای جدول */
+#result_list tbody tr,
+.results table tbody tr {
+  background: var(--bg-surface) !important;
+  transition: background var(--transition) !important;
+}
+#result_list tbody tr:hover,
+.results table tbody tr:hover {
+  background: var(--bg-hover) !important;
+}
+
+#result_list tbody td,
+.results table tbody td {
+  padding: 11px 14px !important;
+  border: none !important;
+  border-bottom: 1px solid var(--bg-raised) !important;
+  color: var(--txt-primary) !important;
+  vertical-align: middle !important;
+  font-size: 13px !important;
+}
+#result_list tbody td a,
+.results table tbody td a {
+  color: var(--matcha-mid) !important;
+}
+#result_list tbody td a:hover,
+.results table tbody td a:hover {
+  color: var(--matcha-bright) !important;
+}
+
+/* چک‌باکس انتخاب */
+input[type="checkbox"] {
+  accent-color: var(--matcha-bright);
+}
+
+/* ───────────────────────────────────────────────────────────────
+   فرم‌های ادمین
+─────────────────────────────────────────────────────────────── */
+.module {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--matcha-dim) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  margin-bottom: 16px !important;
+}
+.module h2, .module caption {
+  background: var(--bg-raised) !important;
+  color: var(--matcha-mid) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .6px !important;
+  text-transform: uppercase !important;
+  padding: 10px 16px !important;
+  border-bottom: 1px solid var(--matcha-dim) !important;
+}
+.form-row {
+  border-bottom: 1px solid var(--bg-raised) !important;
+  padding: 12px 16px !important;
+}
+.form-row:last-child { border-bottom: none !important; }
+
+label {
+  color: var(--txt-secondary) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+input[type="text"], input[type="number"], input[type="url"],
+input[type="email"], input[type="password"],
+textarea, select {
+  background: var(--bg-raised) !important;
+  border: 1px solid var(--matcha-dim) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--txt-primary) !important;
+  padding: 8px 12px !important;
+  font-family: 'Vazirmatn', sans-serif !important;
+  font-size: 13px !important;
+  transition: border-color var(--transition) !important;
+  width: 100% !important;
+  max-width: 600px !important;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none !important;
+  border-color: var(--matcha-mid) !important;
+  box-shadow: 0 0 0 3px rgba(76,100,68,.2) !important;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   دکمه‌ها
+─────────────────────────────────────────────────────────────── */
+.submit-row {
+  background: var(--bg-raised) !important;
+  border: none !important;
+  border-top: 1px solid var(--matcha-dim) !important;
+  padding: 12px 16px !important;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important;
+}
+
+input[type="submit"], .button, .btn {
+  background: var(--matcha-deep) !important;
+  color: var(--matcha-bright) !important;
+  border: 1px solid var(--matcha-dim) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 8px 20px !important;
+  font-family: 'Vazirmatn', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all var(--transition) !important;
+}
+input[type="submit"]:hover, .button:hover {
+  background: var(--matcha-bright) !important;
+  color: var(--bg-deep) !important;
+  border-color: var(--matcha-bright) !important;
+}
+.deletelink, a.deletelink {
+  background: var(--espresso-deep) !important;
+  color: var(--espresso-hot) !important;
+  border-color: var(--espresso-mid) !important;
+}
+.deletelink:hover {
+  background: var(--espresso-hot) !important;
+  color: var(--bg-deep) !important;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   فیلترها (sidebar Django)
+─────────────────────────────────────────────────────────────── */
+#changelist-filter {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--matcha-dim) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+}
+#changelist-filter h2 {
+  background: var(--bg-raised) !important;
+  color: var(--matcha-mid) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .6px !important;
+  text-transform: uppercase !important;
+  padding: 10px 14px !important;
+  border-bottom: 1px solid var(--matcha-dim) !important;
+}
+#changelist-filter h3 {
+  color: var(--txt-secondary) !important;
+  font-size: 11px !important;
+  padding: 10px 14px 4px !important;
+  font-weight: 600 !important;
+}
+#changelist-filter ul { padding: 0 0 10px !important; }
+#changelist-filter li {
+  padding: 4px 14px !important;
+  list-style: none !important;
+}
+#changelist-filter li a {
+  color: var(--txt-secondary) !important;
+  font-size: 12px !important;
+}
+#changelist-filter li a:hover { color: var(--matcha-bright) !important; }
+#changelist-filter li.selected a { color: var(--matcha-bright) !important; font-weight: 700 !important; }
+
+/* ───────────────────────────────────────────────────────────────
+   پیام‌های موفقیت / خطا
+─────────────────────────────────────────────────────────────── */
+ul.messagelist { padding: 0 !important; margin-bottom: 16px !important; }
+ul.messagelist li {
+  padding: 10px 16px !important;
+  border-radius: var(--radius-md) !important;
+  font-size: 13px !important;
+  margin-bottom: 6px !important;
+  border: 1px solid;
+}
+ul.messagelist li.success {
+  background: var(--matcha-deep) !important;
+  color: var(--matcha-mid) !important;
+  border-color: var(--matcha-dim) !important;
+}
+ul.messagelist li.error {
+  background: var(--espresso-deep) !important;
+  color: var(--espresso-hot) !important;
+  border-color: var(--espresso-mid) !important;
+}
+ul.messagelist li.warning {
+  background: #2a2010 !important;
+  color: #c8a040 !important;
+  border-color: #4a3a10 !important;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   صفحه‌بندی
+─────────────────────────────────────────────────────────────── */
+.paginator {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 14px 0 0 !important;
+  color: var(--txt-muted) !important;
+  font-size: 12px !important;
+}
+.paginator a {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--matcha-dim) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 4px 10px !important;
+  color: var(--matcha-mid) !important;
+}
+.paginator a:hover, .paginator a.this-page {
+  background: var(--matcha-deep) !important;
+  color: var(--matcha-bright) !important;
+}
+.paginator .this-page {
+  background: var(--matcha-deep) !important;
+  border-color: var(--matcha-dim) !important;
+  color: var(--matcha-bright) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 4px 10px !important;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   جستجو
+─────────────────────────────────────────────────────────────── */
+#toolbar {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 0 16px !important;
+}
+#searchbar {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--matcha-dim) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--txt-primary) !important;
+  padding: 8px 14px !important;
+  font-family: 'Vazirmatn', sans-serif !important;
+  font-size: 13px !important;
+  width: 280px !important;
+}
+#searchbar:focus {
+  border-color: var(--matcha-mid) !important;
+  outline: none !important;
+}
+#search-form input[type="submit"] {
+  padding: 8px 16px !important;
+  font-size: 12px !important;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   اکشن‌ها
+─────────────────────────────────────────────────────────────── */
+.actions {
+  background: var(--bg-raised) !important;
+  border: 1px solid var(--matcha-dim) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 8px 14px !important;
+  margin-bottom: 10px !important;
+  display: flex; align-items: center; gap: 8px !important;
+}
+.actions select {
+  max-width: 240px !important;
+  padding: 6px 10px !important;
+}
+.actions label { display: none !important; }
+
+/* ───────────────────────────────────────────────────────────────
+   ماژول‌های index
+─────────────────────────────────────────────────────────────── */
+#content-related { display: none; }
+
+table.app-{{ app_label }} { display: none; }
+
+/* app-list در صفحه index */
+#content-main > .app-{{ app_label }} {
+  background: var(--bg-surface);
+  border: 1px solid var(--matcha-dim);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ریسپانسیو
+─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  #cafe-sidebar {
+    transform: translateX(100%);
+    transition: transform .25s ease;
+  }
+  #cafe-sidebar.open { transform: translateX(0); }
+  #cafe-main { margin-right: 0; }
+  #cafe-content { padding: 16px; }
+  .dashboard-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   اسکرول‌بار
+─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb {
+  background: var(--matcha-dim);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--matcha-mid); }
+

@@ -1,0 +1,66 @@
+  /* بنر خوش‌آمدگویی با افکت ظریف */
+  .welcome-banner {
+    background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-deep) 100%);
+    border: 1px solid var(--matcha-dim);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-banner::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(200,245,58,0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .welcome-text h2 { color: var(--matcha-bright); font-size: 18px; margin-bottom: 6px; font-weight: 700; z-index: 1; position: relative; }
+  .welcome-text p { color: var(--txt-secondary); font-size: 13px; z-index: 1; position: relative; }
+  .welcome-icon { font-size: 56px; color: var(--matcha-deep); opacity: 0.7; z-index: 1; position: relative; }
+
+  /* ساختار دو ستونه پایین داشبورد */
+  .dashboard-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* استایل جدول اپلیکیشن‌ها */
+  .app-list-table { width: 100%; border-collapse: collapse; }
+  .app-list-table td { padding: 14px 16px; border-bottom: 1px solid var(--bg-raised); vertical-align: middle; }
+  .app-list-table tr:last-child td { border-bottom: none; }
+
+  .action-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600;
+    transition: all var(--transition);
+  }
+  .btn-add { background: var(--bg-hover); color: var(--txt-primary); }
+  .btn-add:hover { background: var(--matcha-dim); color: var(--txt-primary); }
+  .btn-edit { background: var(--matcha-deep); color: var(--matcha-bright); }
+  .btn-edit:hover { background: var(--matcha-bright); color: var(--bg-deep); }
+
+  /* استایل لاگ فعالیت‌ها */
+  .log-list { list-style: none; padding: 16px; margin: 0; }
+  .log-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
+  .log-item:last-child { margin-bottom: 0; }
+  .log-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0; margin-top: 2px;
+  }
+  .log-add { background: var(--matcha-deep); color: var(--matcha-bright); border: 1px solid var(--matcha-dim); }
+  .log-change { background: var(--bg-hover); color: var(--matcha-mid); border: 1px solid var(--bg-raised); }
+  .log-delete { background: var(--espresso-deep); color: var(--espresso-hot); border: 1px solid var(--espresso-mid); }
+  .log-details strong { color: var(--txt-primary); font-size: 12px; font-weight: 500; display: block; margin-bottom: 4px; }
+  .log-details span { color: var(--txt-muted); font-size: 10px; font-family: monospace; letter-spacing: 0.5px; }
+
+  @media (max-width: 992px) {
+    .dashboard-layout { grid-template-columns: 1fr; }
+  }

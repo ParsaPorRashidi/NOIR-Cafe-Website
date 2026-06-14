@@ -1,0 +1,44 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'admin/css/login_custom.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <h1>NOIR</h1>
+
+  {% if form.errors and not form.non_field_errors %}
+  <p class="errornote">
+    لطفاً خطاهای زیر را برطرف کنید.
+  </p>
+  {% endif %}
+
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <p class="errornote">{{ error }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+    <div class="form-row">
+      <label for="id_username">نام کاربری:</label>
+      {{ form.username }}
+      {{ form.username.errors }}
+    </div>
+    <div class="form-row">
+      <label for="id_password">رمز عبور:</label>
+      {{ form.password }}
+      {{ form.password.errors }}
+      <input type="hidden" name="next" value="{{ next }}">
+    </div>
+    <div class="submit-row">
+      <input type="submit" value="ورود به سیستم">
+    </div>
+  </form>
+</div>
+{% endblock %}
